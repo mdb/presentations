@@ -1,4 +1,4 @@
-# lob
+# lobber
 
 * What is it?
 * What's a gem?
@@ -38,6 +38,7 @@ bundle gem your_gem
 
 # This results in:
 
+```
 ├── Gemfile
 ├── LICENSE.txt
 ├── README.md
@@ -47,6 +48,7 @@ bundle gem your_gem
     ├── fake_gem
     │   └── version.rb
     └── fake_gem.rb
+```
 
 # Let's take a look at fake_gem.gemspec:
 
@@ -73,12 +75,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
 end
+```
 
-# Back to lob
+# Back to lobber
 
 Where can I see it?
 
-https://github.com/mdb/lob
+https://github.com/mdb/lobber
 
 # Features of Note
 
@@ -99,8 +102,8 @@ open coverage/index.html
 
 Let's do this!
 
-git clone https://github.com/mdb/lob.git
-cd lob
+git clone https://github.com/mdb/lobber.git
+cd lobber
 rake install
 lob coverage
 
