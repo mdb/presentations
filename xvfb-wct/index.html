@@ -15,10 +15,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/theme/serif.css" id="theme">
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <style>
+      .reveal section img.no-border {
+        background: none;
+        border: none;
+        box-shadow: none;
+      }
+
+      .reveal .slides section.left {
+        text-align: left;
+      }
+    </style>
 
     <!-- Printing and PDF exports -->
     <script>
@@ -41,11 +53,30 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
-          <h1>Headless-Monster</h1>
-          <p>Test headlessly against real browsers using Xvfb!</p>
+          <h2>Headless Testing</h2>
+          <p>Against Real Web Browsers with Xvfb</p>
           <p>
             <small><a href="http://mikeball.info">Mike Ball</a> / <a href="http://twitter.com/clapexcitement">@clapexcitement</a></small>
           </p>
+        </section>
+
+        <section>
+          <h2>Mike Ball</h2>
+          <p><a href="http://mikeball.info">mikeball.info</a></p>
+          <p><a href="http://github.com/mdb">github.com/mdb</a></p>
+          <p><a href="http://twitter.com/clapexcitement">twitter.com/clapexcitement</a></p>
+        </section>
+
+        <section>
+          <img class="no-border" src="images/comcast_logo.png" />
+        </section>
+
+        <section>
+          <img class="no-border" src="images/xtv.png" />
+        </section>
+
+        <section>
+          <img src="images/xfinity_origin.png" />
         </section>
 
         <section>
@@ -65,7 +96,6 @@
             <li>Helps us understand how change impacts the larger system.</li>
             <li>Helps ensures customer quality</li>
           </ul>
-          <p><small><a href="http://www.mikeball.info/blog/automated-testing/">Automated Tests: What, Why, How?</a></small></p>
         </section>
 
         <section>
@@ -74,6 +104,7 @@
             <li>ensures a codebase's health is continuously monitored with each change</li>
             <li>scientific, consistent, and easily repeatable</li>
             <li>as fast and cheap as possible, while still honoring its responsibilities</li>
+            <li>feedback cycle!</li>
           </ul>
         </section>
 
@@ -86,7 +117,6 @@
           <h2>Headless testing helps!</h2>
           <ul>
             <li>phantomjs</li>
-            <li>selenium</li>
             <li>EnvJS</li>
             <li>Rhino</li>
             <li>RubyRacer</li>
@@ -99,7 +129,7 @@
         </section>
 
         <section>
-          <p>What if your technology can't run in a lightweight, headless, Linux VM or container?</p>
+          <p>What if your technology can't run in one of these headless runtimes?</p>
         </section>
 
         <section>
@@ -115,15 +145,31 @@
         </section>
 
         <section>
-          <h2>Enter headless-monster</h2>
-          <p>Provision a headless Linux VM to test Google Polymer elements!</p>
-          <p><a href="https://github.comcast.com/mball0001/headless-monster">github.comcast.com/mball0001/headless-monster</a></p>
+          <h2>Candidate Solutions</h2>
+          <p><a href="http://docs.travis-ci.com/user/gui-and-headless-browsers/">Travis CI</a> - Xvfb</p>
+          <p><a href="https://saucelabs.com/">Sauce Labs</a> - Selenium cloud</p>
+        </section>
+
+        <section>
+          <h2>But...</h2>
+          <p>What if your team can't use these?</p>
+        </section>
+
+        <section>
+          <h3>Enter X Virtual Frame Buffer</h3>
+          <p>AKA Xvfb</p>
+        </section>
+
+        <section>
+          <h2>polymer-testing-box</h2>
+          <p><a href="https://github.com/mdb/polymer-testing-box">github.com/mdb/polymer-testing-box</a></p>
         </section>
 
         <section>
           <h2>Core technologies</h2>
           <ul>
             <li>Xvfb</li>
+            <li>ansible</li>
             <li>Google Chrome (with Flash!)</li>
             <li>Firefox</li>
             <li>Node.js</li>
@@ -155,32 +201,107 @@
         </section>
 
         <section>
-          <h2>Demo Time!</h2>
+          <section>
+            <h2>Demo Time!</h2>
+            <ol>
+              <li>provision a Vagrant Ubuntu box</li>
+              <li>ansible will install and configure all necessary dependencies</li>
+              <li>we'll run some tests against a Polymer web component</li>
+            </ol>
+          </section>
+
+          <section>
+            <h2>Provision the box</h2>
+            <img src="images/vagrant_up.png" />
+          </section>
+
+          <section>
+            <h2>playbook.yml</h2>
+            <ol>
+              <li>Spin up a lightweight headless Ubuntu box</li>
+              <li>install and run Xvfb on display port 0</li>
+              <li>install Node.js, bower, web-component-tester</li>
+              <li>Install Google Chrome and Firefox</li>
+            </ol>
+          </section>
+
+          <section>
+            <h2>ssh into the box</h2>
+            <img src="images/vagrant_ssh.png" />
+          </section>
+
+          <section data-markdown>
+            ## clone core-ajax
+            $ cd /vagrant
+            $ git clone https://github.com/Polymer/core-ajax.git
+          </section>
+
+          <section data-markdown>
+            ## install bower components
+            $ cd /core-ajax
+            $ git checkout 0.5.6
+            $ bower install
+          </section>
+        </section>
+
+        <section>
+          <h2>run web-component-tester</h2>
+          <video controls="controls" src="images/screencast_1.mov"></video>
+        </section>
+
+        <section>
+          <h2>But...</h2>
+          <p>How do we know Chrome and Firefox really ran?</p>
+          <p>What about debugging?</p>
+        </section>
+
+        <section>
+          <h2>VNC!</h2>
+          <p>The Ubuntu box has no GUI but your Mac does!</p>
+        </section>
+
+        <section data-markdown>
+          ## On the Ubuntu box
+          $ sudo apt-get install x11vnc
+          $ x11vnc -display :0 &
+        </section>
+
+        <section data-markdown>
+          ## On your Mac
+          $ brew install Caskroom/cask/tigervnc-viewer
+
+          # Start Tiger VNC Viewer on `localhost:5901`
+        </section>
+
+        <section>
+          <video controls="controls" src="images/screencast_2.mov"></video>
+        </section>
+
+        <section>
+          <h2>The code</h2>
           <ul>
-            <li>provision a Vagrant Ubuntu box using ansible</li>
-            <li>ansible will install all necessary dependencies</li>
-            <li>we'll run some Polymer tests</li>
+            <li>github.com/mdb/polymer-testing-box</li>
+            <li>github.com/mdb/nw-testing-box</li>
           </ul>
         </section>
 
         <section>
           <h2>Next steps</h2>
           <ul>
-            <li>spin up an OpenStack instance during your builds?</li>
-            <li>test NW.js?</li>
-            <li>test and build the player during CI?</li>
+            <li>spin up an cloud instance during your builds?</li>
+            <li>AWS, Digital Ocean, OpenStack?</li>
+            <li>as-testing-box?</li>
             <li>advancd web scraping?</li>
-            <li>headless cucumber functional tests?</li>
           </ul>
         </section>
-
         <section>
-          <h2>Bonus</h2>
-          <p>Clientside performance testing!</p>
+          <h1>Thanks!</h1>
+          <ul>
+            <li>twitter.com/clapexcitement</li>
+            <li>github.com/mdb</li>
+          </ul>
         </section>
-
       </div>
-
     </div>
 
     <script src="lib/js/head.min.js"></script>
