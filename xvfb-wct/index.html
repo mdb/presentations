@@ -145,9 +145,47 @@
         </section>
 
         <section>
+          <h2>Let's focus on Google Polymer</h2>
+        </section>
+
+        <section>
+          <h2>Google Polymer</h2>
+          <p>Google technology for authoring web components (see Chris Lorenzo's talk!)</p>
+        </section>
+
+        <section>
+          <h2>web-component-tester</h2>
+          <p>github.com/Polymer/web-component-tester</p>
+        </section>
+
+        <section>
+          <h2>But...</h2>
+          <p>web-component-tester assumes a GUI</p>
+          <p>and virtualized CI build agents don't have a display</p>
+        </section>
+
+        <section>
           <h2>Candidate Solutions</h2>
-          <p><a href="http://docs.travis-ci.com/user/gui-and-headless-browsers/">Travis CI</a> - Xvfb</p>
-          <p><a href="https://saucelabs.com/">Sauce Labs</a> - Selenium cloud</p>
+          <p>Travis CI</p>
+          <p>Sauce Labs</p>
+        </section>
+
+        <section>
+          <h2>Travis CI</h2>
+          <p><a href="http://docs.travis-ci.com/user/gui-and-headless-browsers/">docs.travis-ci.com/user/gui-and-headless-browsers</a></p>
+          <ul>
+            <li>Xvfb</li>
+            <li>Firefox</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Sauce Labs CI</h2>
+          <p><a href="https://saucelabs.com">saucelabs.com</a></p>
+          <ul>
+            <li>Selenium cloud</li>
+            <li>Access to over 100 device/OS/browser combos</li>
+          </ul>
         </section>
 
         <section>
@@ -156,8 +194,40 @@
         </section>
 
         <section>
+          <ul>
+            <li>budget</li>
+            <li>SLA</li>
+            <li>etc.</li>
+          </ul>
+        </section>
+
+        <section>
           <h3>Enter X Virtual Frame Buffer</h3>
           <p>AKA Xvfb</p>
+          <p>run GUI applications (like web browsers) with no GUI!</p>
+        </section>
+
+        <section>
+          <h2>Sidebar: let's talk about the X Window System</h2>
+          <p>how GUI displays are rendered on UNIX-like systems</p>
+        </section>
+
+        <section>
+          <h2>X11 Display Server</h2>
+          <ul>
+            <li>current release of the X Window System</li>
+            <li>windowing system for bitmap displays used to build GUIs</li>
+            <li>how visual elements are rendered on a screen and available for user interaction via GUI in Mac OS and Linux</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>X Virtual Frame Buffer</h2>
+          <ul>
+            <li>behaves like any other X server, yet no graphical output is shown</li>
+            <li>performs graphical operations in memory without showing screen output</li>
+            <li>does not require the computer running it to have a screen</li>
+          </ul>
         </section>
 
         <section>
@@ -179,28 +249,6 @@
         </section>
 
         <section>
-          <h2>Sidebar: let's talk about X Server</h2>
-        </section>
-
-        <section>
-          <h2>X11 Display Server</h2>
-          <ul>
-            <li>current release of the X Window System</li>
-            <li>windowing system for bitmap displays used to build graphical user interfaces</li>
-            <li>how visual elements are rendered on a screen and available for user interaction via GUI in Mac OS and Linux</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>X Virtual Frame Buffer</h2>
-          <ul>
-            <li>behaves like any other X server, yet no graphical output is shown</li>
-            <li>performs graphical operations in memory without showing screen output</li>
-            <li>does not require the computer running it to have a screen</li>
-          </ul>
-        </section>
-
-        <section>
           <section>
             <h2>Demo Time!</h2>
             <ol>
@@ -211,18 +259,38 @@
           </section>
 
           <section>
-            <h2>Provision the box</h2>
-            <img src="images/vagrant_up.png" />
+            <h2>Vagrant</h2>
+            <p>(not JavaScript)</p>
+            <ul>
+              <li>built on VirtualBox</li>
+              <li>tool to spin up lightweight, headless VMs</li>
+            </ul>
+          </section>
+
+          <section data-markdown>
+            ## Vagrantfile
+            ...
+            config.vm.network 'forwarded_port', guest: 5900, host: 5901
+
+            config.vm.provision :ansible do |ansible|
+              ansible.playbook = 'playbook.yml'
+            end
+            ...
           </section>
 
           <section>
-            <h2>playbook.yml</h2>
+            <h2>ansible playbook.yml</h2>
+            <p>(not JavaScript)<p>
             <ol>
-              <li>Spin up a lightweight headless Ubuntu box</li>
               <li>install and run Xvfb on display port 0</li>
               <li>install Node.js, bower, web-component-tester</li>
               <li>Install Google Chrome and Firefox</li>
             </ol>
+          </section>
+
+          <section>
+            <h2>Provision the box</h2>
+            <img src="images/vagrant_up.png" />
           </section>
 
           <section>
@@ -291,7 +359,8 @@
             <li>spin up an cloud instance during your builds?</li>
             <li>AWS, Digital Ocean, OpenStack?</li>
             <li>as-testing-box?</li>
-            <li>advancd web scraping?</li>
+            <li>advanced web scraping?</li>
+            <li>headless functional testing?</li>
           </ul>
         </section>
         <section>
