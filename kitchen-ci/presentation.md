@@ -13,6 +13,10 @@ theme: sjaakvandenberg/cleaver-dark
 
 ---
 
+# Prologue
+
+---
+
 ### How do we ensure quality software?
 
 * automated tests
@@ -40,7 +44,11 @@ http://kitchen.ci
 * packaged via `test-kitchen` gem
 * test harness to execute code
 * run code on various cloud providers and virtualization technologies
-* can write [Serverspec](http://serverspec.org/) tests ensuring its quality
+* [Serverspec](http://serverspec.org/) tests guarantee behavior
+
+---
+
+# Serverspec?
 
 ---
 
@@ -58,6 +66,10 @@ describe port(80) do
   it { should be_listening }
 end
 ```
+
+---
+
+# An example
 
 ---
 
@@ -80,6 +92,13 @@ end
                 ├── apache_spec.rb
                 └── spec_helper.rb
 ```
+
+---
+
+### test-kitchen-example
+
+* provision a basic server with Ansible
+* test that it functions as spec'd
 
 ---
 
@@ -150,6 +169,16 @@ end
 
 ----
 
+```
+bundle exec kitchen test
+```
+
+1. provision
+2. test
+3. destroy
+
+----
+
 ### Demo
 
 <img src="images/output.gif" />
@@ -157,5 +186,11 @@ end
 ----
 
 <img style="width:80%; display: block; margin: 0 auto;" src="images/output_success.png" />
+
+----
+
+### Thanks!
+
+github.com/mdb/test-kitchen-example
 
 ----

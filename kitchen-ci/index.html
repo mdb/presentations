@@ -492,6 +492,10 @@ pre .xml .cdata {
 </section>
   </div>
   <div class="slide hidden -" id="slide-2">
+    <section class="slide-content"><h1 id="prologue">Prologue</h1>
+</section>
+  </div>
+  <div class="slide hidden -" id="slide-3">
     <section class="slide-content"><h3 id="how-do-we-ensure-quality-software-">How do we ensure quality software?</h3>
 <ul>
 <li>automated tests</li>
@@ -500,28 +504,32 @@ pre .xml .cdata {
 </ul>
 </section>
   </div>
-  <div class="slide hidden -" id="slide-3">
+  <div class="slide hidden -" id="slide-4">
     <section class="slide-content"><h3 id="what-about-the-universe-beyond-the-application-">What about the universe beyond the application?</h3>
 <p>Or at least its infrastructure?</p>
 </section>
   </div>
-  <div class="slide hidden -" id="slide-4">
+  <div class="slide hidden -" id="slide-5">
     <section class="slide-content"><h3 id="kitchenci">KitchenCI</h3>
 <p>&quot;Your infrastructure deserves tests too.&quot;</p>
 <p><a href="http://kitchen.ci">http://kitchen.ci</a></p>
 </section>
   </div>
-  <div class="slide hidden -" id="slide-5">
+  <div class="slide hidden -" id="slide-6">
     <section class="slide-content"><h3 id="what-">What?</h3>
 <ul>
 <li>packaged via <code>test-kitchen</code> gem</li>
 <li>test harness to execute code</li>
 <li>run code on various cloud providers and virtualization technologies</li>
-<li>can write <a href="http://serverspec.org/">Serverspec</a> tests ensuring its quality</li>
+<li><a href="http://serverspec.org/">Serverspec</a> tests guarantee behavior</li>
 </ul>
 </section>
   </div>
-  <div class="slide hidden -" id="slide-6">
+  <div class="slide hidden -" id="slide-7">
+    <section class="slide-content"><h1 id="serverspec-">Serverspec?</h1>
+</section>
+  </div>
+  <div class="slide hidden -" id="slide-8">
     <section class="slide-content"><h3 id="serverspec-org">Serverspec.org</h3>
 <p>Rspec tests for your infrastructure!</p>
 <pre><code class="lang-ruby">describe service(<span class="string">'apache2'</span>) <span class="keyword">do</span>
@@ -534,7 +542,11 @@ describe port(<span class="number">80</span>) <span class="keyword">do</span>
 <span class="keyword">end</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden -" id="slide-7">
+  <div class="slide hidden -" id="slide-9">
+    <section class="slide-content"><h1 id="an-example">An example</h1>
+</section>
+  </div>
+  <div class="slide hidden -" id="slide-10">
     <section class="slide-content"><h3 id="github-com-mdb-test-kitchen-example">github.com/mdb/test-kitchen-example</h3>
 <pre><code>├── Gemfile
 ├── Gemfile.lock
@@ -553,7 +565,15 @@ describe port(<span class="number">80</span>) <span class="keyword">do</span>
                 └── spec_helper.rb</code></pre>
 </section>
   </div>
-  <div class="slide hidden -" id="slide-8">
+  <div class="slide hidden -" id="slide-11">
+    <section class="slide-content"><h3 id="test-kitchen-example">test-kitchen-example</h3>
+<ul>
+<li>provision a basic server with Ansible</li>
+<li>test that it functions as spec&#39;d</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden -" id="slide-12">
     <section class="slide-content"><h3 id="install-dependencies">Install dependencies</h3>
 <p>Gems:</p>
 <pre><code>bundle install</code></pre>
@@ -561,7 +581,7 @@ describe port(<span class="number">80</span>) <span class="keyword">do</span>
 <pre><code>ansible-galaxy install --role-file=ansible/requirements.yml --roles-path=ansible/roles</code></pre>
 </section>
   </div>
-  <div class="slide hidden -" id="slide-9">
+  <div class="slide hidden -" id="slide-13">
     <section class="slide-content"><h3 id="-kitchen-yml">.kitchen.yml</h3>
 <p>wire up test-kitchen</p>
 <pre><code>driver:
@@ -576,7 +596,7 @@ provisioner:
 ...</code></pre>
 </section>
   </div>
-  <div class="slide hidden -" id="slide-10">
+  <div class="slide hidden -" id="slide-14">
     <section class="slide-content"><h3 id="a-note-on-ansible">A Note on Ansible</h3>
 <pre><code>ansible/playbook.yml</code></pre>
 <ul>
@@ -586,7 +606,7 @@ provisioner:
 </ul>
 </section>
   </div>
-  <div class="slide hidden -" id="slide-11">
+  <div class="slide hidden -" id="slide-15">
     <section class="slide-content"><h3 id="the-tests">The Tests</h3>
 <pre><code class="lang-ruby">test/integration/default/serverspec/*_spec.rb</code></pre>
 <p>Example:</p>
@@ -599,19 +619,33 @@ provisioner:
 <span class="keyword">end</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden --" id="slide-12">
+  <div class="slide hidden --" id="slide-16">
+    <section class="slide-content"><pre><code>bundle exec kitchen test</code></pre>
+<ol>
+<li>provision</li>
+<li>test</li>
+<li>destroy</li>
+</ol>
+</section>
+  </div>
+  <div class="slide hidden --" id="slide-17">
     <section class="slide-content"><h3 id="demo">Demo</h3>
 <p><img src="images/output.gif" /></p>
 </section>
   </div>
-  <div class="slide hidden --" id="slide-13">
+  <div class="slide hidden --" id="slide-18">
     <section class="slide-content"><p><img style="width:80%; display: block; margin: 0 auto;" src="images/output_success.png" /></p>
 </section>
   </div>
-  <div class="slide hidden --" id="slide-14">
+  <div class="slide hidden --" id="slide-19">
+    <section class="slide-content"><h3 id="thanks-">Thanks!</h3>
+<p>github.com/mdb/test-kitchen-example</p>
+</section>
+  </div>
+  <div class="slide hidden --" id="slide-20">
     <section class="slide-content"></section>
   </div>
-  <div class="slide hidden" id="slide-15">
+  <div class="slide hidden" id="slide-21">
     <section class="slide-content"><div class="author">
   <h1 class="name">Mike Ball</h1>
     <h3 class="url">
